@@ -7,14 +7,49 @@ document.addEventListener('click', event => {
     })
 
   } else if (event.target.dataset.type === 'edit') {
-    const id = event.target.dataset.id
-    const value = event.target.dataset.value
+    const li = event.target.closest('li');
+    const title = li.querySelector('.title');
+    const input = li.querySelector('.input');
 
-    const newValue = prompt(`Введите новое название`, value).trim();
+    const value = title.innerText;
+
+    title.classList.add('d-none');
+    input.classList.remove('d-none');
+    input.value = value;
+
+    li.querySelector('.removing').classList.remove('d-none');
+    li.querySelector('.base').classList.add('d-none');
+
+  } else if (event.target.dataset.type === 'decline') {
+
+    const li = event.target.closest('li');
+    const title = li.querySelector('.title');
+    const input = li.querySelector('.input');
+
+    title.classList.remove('d-none');
+    input.classList.add('d-none');
+
+    li.querySelector('.removing').classList.add('d-none');
+    li.querySelector('.base').classList.remove('d-none');
+
+  } else if (event.target.dataset.type === 'submit') {
+
+    const id = event.target.dataset.id
+
+    const li = event.target.closest('li');
+    const title = li.querySelector('.title');
+    const input = li.querySelector('.input');
+
+    const newValue = input.value.trim();
 
     if (newValue.length) {
       update(id, newValue).then(() => {
-        event.target.closest('li').querySelector('.title').innerText = newValue;
+        title.innerText = newValue;
+        title.classList.remove('d-none');
+        input.classList.add('d-none');
+
+        li.querySelector('.removing').classList.add('d-none');
+        li.querySelector('.base').classList.remove('d-none');
       });
     } else {
       alert('Необходимо ввести название');

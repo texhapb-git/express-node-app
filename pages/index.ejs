@@ -38,15 +38,28 @@
           <div class="card">
             <ul class="list-group">
               <% for (let i=0; i < notes.length; i++) { %>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <span class="title">
-                    <%= notes[i].title %>
-                  </span>
-                  <div class="d-flex gap-2">
-                    <button class="btn btn-primary" data-type="edit" data-id="<%= notes[i].id %>"
-                      data-value="<%= notes[i].title %>">Редактировать</button>
-                    <button class="btn btn-danger" data-type="remove" data-id="<%= notes[i].id %>">&times;</button>
+                <li class="list-group-item d-flex justify-content-between align-items-center"
+                  data-id="<%= notes[i].id %>">
+                  <div>
+                    <span class="title">
+                      <%= notes[i].title %>
+                    </span>
+                    <input type="text" class="input d-none" />
                   </div>
+
+                  <div>
+                    <div class="d-flex gap-2 removing d-none">
+                      <button class="btn btn-primary" data-type="submit" data-id="<%= notes[i].id %>">Сохранить</button>
+                      <button class="btn btn-danger" data-type="decline" data-id="<%= notes[i].id %>">Отменить</button>
+                    </div>
+                    <div class="d-flex base gap-2">
+                      <button class="btn btn-primary" data-type="edit"
+                        data-id="<%= notes[i].id %>">Редактировать</button>
+                      <button class="btn btn-danger" data-type="remove" data-id="<%= notes[i].id %>">&times;</button>
+                    </div>
+                  </div>
+
+
 
                 </li>
                 <% } %>
